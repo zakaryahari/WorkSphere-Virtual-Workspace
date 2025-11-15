@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WorkSphere</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
+  </head>
+  <body>
+    <main class="grid grid-cols-1 lg:grid-cols-4 min-h-screen">
+      <div
+        class="side-bar lg:col-span-1 bg-white p-6 shadow-2xl rounded-lg h-full"
+      >
+        <h1 class="text-2xl font-bold">List Des Employee</h1>
+      </div>
+      <div class="etage-floor lg:col-span-3">
+        <div id="zone-conference" class="zone"></div>
+        <div id="zone-reception" class="zone"></div>
+        <div id="zone-serveurs" class="zone"></div>
+        <div id="zone-securite" class="zone"></div>
+        <div id="zone-personnel" class="zone"></div>
+        <div id="zone-archives" class="zone"></div>
+      </div>
+    </main>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
