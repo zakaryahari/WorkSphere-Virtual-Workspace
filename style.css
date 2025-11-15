@@ -1,4 +1,21 @@
-html , body {
-    margin: 0;
-    padding: 0;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.etage-floor {
+  position: relative;
+  background-image: url(images/bg/plan-69159a65c5684763515973.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: rgb(221, 221, 221);
+  background-position: center;
+}
+
+.side-bar {
+}
+.zone {
+  position: absolute;
 }
