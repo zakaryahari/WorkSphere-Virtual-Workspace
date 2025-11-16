@@ -32,9 +32,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  /* pointer-events: none; */
-  top: 0;
-  left: 0;
 }
 
 #zone-conference {
@@ -75,6 +72,15 @@ body {
 
 #zone-personnel {
   right: 340px;
+  bottom: 0;
+  width: 310px;
+  height: 270px;
+  justify-items: center;
+  align-content: center;
+}
+
+#zone-archives {
+  right: 340px;
   top: 0;
   width: 310px;
   height: 280px;
@@ -82,11 +88,82 @@ body {
   align-content: center;
 }
 
-#zone-archives {
-  right: 340px;
-  bottom: 0;
-  width: 310px;
-  height: 280px;
-  justify-items: center;
-  align-content: center;
+#img-mobile {
+  display: none;
+}
+@media (min-width: 345px) and (max-width: 1023px) {
+  #img-desktop {
+    display: none !important;
+  }
+  #img-mobile {
+    display: block;
+    width: 100vw;
+    height: auto;
+  }
+
+  .etage-floor {
+    padding: 10px 0;
+    min-height: auto;
+    align-content: start;
+  }
+  .map-img {
+    max-width: 95%;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .zone {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  #zone-conference {
+    top: 0%;
+    right: 0%;
+    height: 63vw;
+    width: 32vw;
+    left: unset;
+  }
+
+  #zone-reception {
+    top: 0%;
+    left: 0%;
+    height: 63vw;
+    width: 65vw;
+  }
+
+  #zone-securite {
+    top: unset;
+    bottom: 0%;
+    right: 0%;
+    height: 38vw;
+    width: 33vw;
+  }
+
+  #zone-serveurs {
+    top: unset;
+    bottom: 0%;
+    left: 0%;
+    height: 37vw;
+    width: 32vw;
+    right: unset;
+  }
+
+  #zone-personnel {
+    right: unset;
+    bottom: 37vw;
+    left: 0%;
+    height: 37vw;
+    width: 32vw;
+  }
+
+  #zone-archives {
+    top: unset;
+    bottom: 39vw;
+    right: 0%;
+    height: 36vw;
+    width: 33vw;
+    left: unset;
+  }
 }
