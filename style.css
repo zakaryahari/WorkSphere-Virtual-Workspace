@@ -2,7 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-family: "Momo Trust Display";
 }
 
 .etage-floor {
@@ -91,6 +91,55 @@ body {
 #img-mobile {
   display: none;
 }
+
+.Add-new-employee-form-container {
+  position: fixed;
+  background-color: #36363679;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: grid;
+}
+
+.Add-new-employee-form-container {
+  justify-items: center;
+  align-items: center;
+}
+
+.Form-container {
+  background-color: white;
+  width: 600px;
+  padding: 25px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 15px 5px #ffffff4d;
+}
+
+#add_employee_form {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+#add_employee_form label {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: "Poppins";
+  font-size: 25px;
+}
+
+.form_input {
+  padding: 15px;
+  border: none;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 8px;
+}
+
+.form_btn {
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
 @media (min-width: 345px) and (max-width: 1023px) {
   #img-desktop {
     display: none !important;
