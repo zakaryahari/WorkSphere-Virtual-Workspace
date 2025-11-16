@@ -37,10 +37,10 @@ body {
 #zone-conference {
   left: 0;
   top: 0;
-  height: 270px;
-  width: 545px;
   justify-items: center;
   align-content: center;
+  height: 13vw;
+  width: 27vw;
 }
 
 #zone-reception {
@@ -48,44 +48,44 @@ body {
   left: 0;
   justify-items: center;
   align-content: center;
-  height: 550px;
-  width: 545px;
+  height: 26.5vw;
+  width: 27vw;
 }
 
 #zone-serveurs {
   right: 0;
   bottom: 0;
-  width: 330px;
-  height: 270px;
   justify-items: center;
   align-content: center;
+  height: 13.5vw;
+  width: 16vw;
 }
 
 #zone-securite {
   right: 0;
   top: 0;
-  width: 330px;
-  height: 280px;
   justify-items: center;
   align-content: center;
+  height: 13.5vw;
+  width: 16vw;
 }
 
 #zone-personnel {
-  right: 340px;
+  right: 16vw;
   bottom: 0;
-  width: 310px;
-  height: 270px;
   justify-items: center;
   align-content: center;
+  height: 13.5vw;
+  width: 16vw;
 }
 
 #zone-archives {
-  right: 340px;
+  right: 16vw;
   top: 0;
-  width: 310px;
-  height: 280px;
   justify-items: center;
   align-content: center;
+  height: 13.5vw;
+  width: 16vw;
 }
 
 #img-mobile {
