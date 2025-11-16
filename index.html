@@ -69,8 +69,12 @@
             <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2">Employee Details</h2>
             <label for="employee_nom_input">Nom:</label>
             <input type="text" id="employee_nom_input" class="form_input" />
+            <span id="employee_nom_msg_error" class="text-red-900"></span>
+
             <label for="employee_role_input">Rôle:</label>
             <input type="text" id="employee_role_input" class="form_input" />
+            <!-- <span id="employee_nom_msg_error" class="text-red-900">msg d'error</span> -->
+
             <label for="employee_photo_input">Photo:</label>
             <!-- <input type="file" id="employee_photo_input" class="form_input" /> -->
             <!-- <img src="images/profile/profile-default.jpg" alt="" class="w-[100px] rounded-full borber-dashed" id="employee_photo_profile" /> -->
@@ -81,8 +85,11 @@
             <!-- <hr class="" /> -->
             <label for="employee_email_input">Email:</label>
             <input type="text" id="employee_email_input" class="form_input" />
+            <span id="employee_email_msg_error" class="text-red-900">msg d'error</span>
+
             <label for="employee_tel_input">Téléphone:</label>
             <input type="tel" id="employee_tel_input" class="form_input" />
+            <span id="employee_tel_msg_error" class="text-red-900">msg d'error</span>
 
             <div id="experiences_container" class="space-y-4">
               <h3 class="text-xl font-bold text-gray-800 mb-2">Expériences Professionnelles:</h3>
