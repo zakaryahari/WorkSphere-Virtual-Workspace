@@ -1,16 +1,20 @@
 const add_employee_form = document.querySelector('#add_employee_form');
 
 function Valide_input_regex(inputElement, regex, span_id, msg_error) {
+  let isvalid = true;
   const employee_nom_msg_error = document.getElementById(span_id);
   if (regex.test(inputElement.value)) {
     employee_nom_msg_error.textContent = '';
   }
   if (!regex.test(inputElement.value) && inputElement.value !== '') {
     employee_nom_msg_error.textContent = msg_error;
+    isvalid = false;
   }
   if (inputElement.value === '') {
     employee_nom_msg_error.textContent = '';
+    isvalid = false;
   }
+  return isvalid;
 }
 
 if (add_employee_form) {
@@ -44,6 +48,11 @@ if (add_employee_form) {
 
       previewImg.src = URL.createObjectURL(file);
     }
+    // console.log(element_input.id);
+    // if (element_input.id === 'employee_close_input') {
+    //   // add_employee_form.reset();
+    //   Add_new_employee_form_container.classList.add('hidden');
+    // }
   });
 }
 
@@ -63,5 +72,14 @@ const add_employee_btn = document.querySelector('.Add-new-employee');
 if (add_employee_btn) {
   add_employee_btn.addEventListener('click', () => {
     Add_new_employee_form_container.classList.toggle('hidden');
+  });
+}
+
+const close_btn = document.getElementById('employee_close_input');
+
+if (close_btn) {
+  close_btn.addEventListener('click', () => {
+    add_employee_form.reset();
+    Add_new_employee_form_container.classList.add('hidden');
   });
 }
