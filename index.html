@@ -68,27 +68,35 @@
           <form method="post" id="add_employee_form" class="grid">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2">Employee Details</h2>
             <label for="employee_nom_input">Nom:</label>
-            <input type="text" id="employee_nom_input" class="form_input" />
+            <input type="text" id="employee_nom_input" class="form_input outline-none" />
             <span id="employee_nom_msg_error" class="text-red-900"></span>
 
-            <label for="employee_role_input">Rôle:</label>
-            <input type="text" id="employee_role_input" class="form_input" />
+            <label for="employee_role_input" class="text-lg font-semibold text-gray-700 mt-2">Rôle:</label>
+            <select id="employee_role_input" class="form_input px-4 py-2 outline-none">
+              <option value="" disabled selected>Sélectionner un rôle</option>
+              <option value="Réceptionniste">Réceptionniste</option>
+              <option value="Technicien IT">Technicien IT</option>
+              <option value="Agent de sécurité">Agent de sécurité</option>
+              <option value="Manager">Manager</option>
+              <option value="Nettoyage">Nettoyage</option>
+              <option value="Autre">Autre (Accès libre)</option>
+            </select>
             <!-- <span id="employee_nom_msg_error" class="text-red-900">msg d'error</span> -->
 
             <label for="employee_photo_input">Photo:</label>
             <!-- <input type="file" id="employee_photo_input" class="form_input" /> -->
             <!-- <img src="images/profile/profile-default.jpg" alt="" class="w-[100px] rounded-full borber-dashed" id="employee_photo_profile" /> -->
             <div class="grid lg:grid-cols-3 items-center space-x-4 mb-4">
-              <input type="file" id="employee_photo_input" class="form_input col-span-2 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+              <input type="file" id="employee_photo_input" class="form_input outline-none col-span-2 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
               <img src="images/profile/profile-default.jpg" alt="Profile Preview" class="w-20 h-20 col-span-1 rounded-full border-2 border-dashed border-gray-400 object-cover" id="employee_photo_profile" />
             </div>
             <!-- <hr class="" /> -->
             <label for="employee_email_input">Email:</label>
-            <input type="text" id="employee_email_input" class="form_input" />
+            <input type="text" id="employee_email_input" class="form_input outline-none" />
             <span id="employee_email_msg_error" class="text-red-900"></span>
 
             <label for="employee_tel_input">Téléphone:</label>
-            <input type="tel" id="employee_tel_input" class="form_input" />
+            <input type="tel" id="employee_tel_input" class="form_input outline-none" />
             <span id="employee_tel_msg_error" class="text-red-900"></span>
 
             <div id="experiences_container" class="space-y-4">
