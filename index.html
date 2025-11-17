@@ -63,51 +63,77 @@
         </div>
       </div>
 
-      <div class="fixed grid z-50 h-full w-full top-0 left-0 justify-items-center items-center bg-gray-500/50" id="Add-new-employee-form-container">
+      <div class="fixed grid z-50 h-full w-full top-0 left-0 justify-items-center items-center bg-gray-500/50 hidden" id="Add-new-employee-form-container">
         <div class="Form-container">
-          <form method="post" id="add_employee_form" class="grid">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2">Employee Details</h2>
-            <label for="employee_nom_input">Nom:</label>
-            <input type="text" id="employee_nom_input" class="form_input outline-none" />
-            <span id="employee_nom_msg_error" class="text-red-900"></span>
-
-            <label for="employee_role_input" class="text-lg font-semibold text-gray-700 mt-2">Rôle:</label>
-            <select id="employee_role_input" class="form_input px-4 py-2 outline-none">
-              <option value="" disabled selected>Sélectionner un rôle</option>
-              <option value="Réceptionniste">Réceptionniste</option>
-              <option value="Technicien IT">Technicien IT</option>
-              <option value="Agent de sécurité">Agent de sécurité</option>
-              <option value="Manager">Manager</option>
-              <option value="Nettoyage">Nettoyage</option>
-              <option value="Autre">Autre (Accès libre)</option>
-            </select>
+          <form method="post" id="add_employee_form" class="grid grid-cols-1 lg:grid-cols-2">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2 col-span-1 lg:col-span-2">Employee Details</h2>
+            <div class="lg:col-span-1 mx-4">
+              <label for="employee_nom_input" class="block">Nom:</label>
+              <input type="text" id="employee_nom_input" class="form_input outline-none w-full" />
+              <span id="employee_nom_msg_error" class="text-red-900"></span>
+            </div>
+            <div class="lg:col-span-1 mx-4">
+              <label for="employee_role_input" class="block">Rôle:</label>
+              <select id="employee_role_input" class="form_input px-4 py-2 outline-none w-full">
+                <option value="" disabled selected>Sélectionner un rôle</option>
+                <option value="Réceptionniste">Réceptionniste</option>
+                <option value="Technicien IT">Technicien IT</option>
+                <option value="Agent de sécurité">Agent de sécurité</option>
+                <option value="Manager">Manager</option>
+                <option value="Nettoyage">Nettoyage</option>
+                <option value="Autre">Autre (Accès libre)</option>
+              </select>
+            </div>
+            <br />
             <!-- <span id="employee_nom_msg_error" class="text-red-900">msg d'error</span> -->
-
-            <label for="employee_photo_input">Photo:</label>
-            <!-- <input type="file" id="employee_photo_input" class="form_input" /> -->
-            <!-- <img src="images/profile/profile-default.jpg" alt="" class="w-[100px] rounded-full borber-dashed" id="employee_photo_profile" /> -->
-            <div class="grid lg:grid-cols-3 items-center space-x-4 mb-4">
-              <input type="file" id="employee_photo_input" class="form_input outline-none col-span-2 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
-              <img src="images/profile/profile-default.jpg" alt="Profile Preview" class="w-20 h-20 col-span-1 rounded-full border-2 border-dashed border-gray-400 object-cover" id="employee_photo_profile_img" />
+            <div class="lg:col-span-2 mx-4">
+              <label for="employee_photo_input" class="block">Photo:</label>
+              <!-- <input type="file" id="employee_photo_input" class="form_input" /> -->
+              <!-- <img src="images/profile/profile-default.jpg" alt="" class="w-[100px] rounded-full borber-dashed" id="employee_photo_profile" /> -->
+              <div class="grid lg:grid-cols-3 items-center space-x-4 mb-4">
+                <input type="file" id="employee_photo_input" class="form_input outline-none col-span-2 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+                <img src="images/profile/profile-default.jpg" alt="Profile Preview" class="w-20 h-20 col-span-1 rounded-full border-2 border-dashed border-gray-400 object-cover" id="employee_photo_profile_img" />
+              </div>
             </div>
             <!-- <hr class="" /> -->
-            <label for="employee_email_input">Email:</label>
-            <input type="text" id="employee_email_input" class="form_input outline-none" />
-            <span id="employee_email_msg_error" class="text-red-900"></span>
-
-            <label for="employee_tel_input">Téléphone:</label>
-            <input type="tel" id="employee_tel_input" class="form_input outline-none" />
-            <span id="employee_tel_msg_error" class="text-red-900"></span>
-
-            <div id="experiences_container" class="space-y-4">
-              <h3 class="text-xl font-bold text-gray-800 mb-2">Expériences Professionnelles:</h3>
+            <div class="lg:col-span-1 mx-4">
+              <label for="employee_email_input" class="block">Email:</label>
+              <input type="text" id="employee_email_input" class="form_input outline-none w-full" />
+              <span id="employee_email_msg_error" class="text-red-900"></span>
             </div>
-            <button type="button" id="employee_experience_button" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 text-base mt-2 mb-4 flex items-center justify-center space-x-2">+ Ajouter Expérience</button>
+            <div class="lg:col-span-1 mx-4">
+              <label for="employee_tel_input" class="block">Téléphone:</label>
+              <input type="tel" id="employee_tel_input" class="form_input outline-none w-full" />
+              <span id="employee_tel_msg_error" class="text-red-900"></span>
+            </div>
+            <br />
 
-            <input type="hidden" id="edit-id_hidden" value="" />
-            <hr />
-            <button type="button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-md text-2xl my-2 py-4" id="employee_save_input">Save</button>
-            <button type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-md text-2xl my-2 py-4" id="employee_close_input">Close</button>
+            <div class="col-span-2 mx-4">
+              <h3 class="text-xl font-bold text-gray-800 mb-2 border-b pb-1">Expériences Professionnelles:</h3>
+              <div id="experiences_container" class="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                <div class="col-span-1">
+                  <label for="exp_title_input" class="block">Titre du poste:</label>
+                  <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                </div>
+                <div class="col-span-1">
+                  <label for="exp_date_input" class="block">Date de début:</label>
+                  <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                </div>
+              </div>
+            </div>
+            <div class="mx-4 col-span-2">
+              <div class="col-span-2">
+                <button type="button" id="employee_experience_button" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md w-full">+ Ajouter Expérience</button>
+              </div>
+
+              <input type="hidden" id="edit-id_hidden" value="" />
+              <hr />
+              <br />
+              <div class="col-span-2 grid grid-cols-1 lg:grid-cols-1">
+                <button type="button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-md text-2xl my-2 py-4" id="employee_save_input">Save</button>
+                <button type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-md text-2xl my-2 py-4" id="employee_close_input">Close</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
