@@ -72,6 +72,10 @@ const add_employee_btn = document.querySelector('.Add-new-employee');
 if (add_employee_btn) {
   add_employee_btn.addEventListener('click', () => {
     Add_new_employee_form_container.classList.toggle('hidden');
+    // const etage_floor = document.querySelector('.etage-floor');
+    // const sideBar = document.querySelector('.side-bar');
+    // sideBar.style.filter = 'blur(2px)';
+    // etage_floor.style.filter = 'blur(2px)';
   });
 }
 
@@ -82,4 +86,32 @@ if (close_btn) {
     add_employee_form.reset();
     Add_new_employee_form_container.classList.add('hidden');
   });
+}
+
+function Add_employee_experience() {
+  const experiences_container = document.getElementById('experiences_container');
+  const element_child = `                
+                <div class="col-span-1">
+                  <label for="exp_title_input" class="block">Titre du poste:</label>
+                  <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                </div>
+                <div class="col-span-1">
+                  <label for="exp_title_input" class="block">Titre du poste:</label>
+                  <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                </div>
+                <div class="col-span-1">
+                  <label for="exp_date_input" class="block">Date de début:</label>
+                  <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                </div>
+                <div class="col-span-1">
+                  <label for="exp_date_input" class="block">Date de début:</label>
+                  <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                </div>`;
+}
+
+const employee_experience_button = document.getElementById('employee_experience_button');
+
+if (employee_experience_button) {
+  employee_experience_button.addEventListener('click', () => {});
+  // experiences_container.innerHTML = '';
 }
