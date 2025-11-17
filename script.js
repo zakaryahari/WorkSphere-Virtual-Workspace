@@ -37,6 +37,13 @@ if (add_employee_form) {
     if (element_input.id === 'employee_tel_input') {
       Valide_input_regex(element_input, phone_regex, phone_spanId, phone_msg_error);
     }
+
+    if (element_input.id === 'employee_photo_input') {
+      const previewImg = document.getElementById('employee_photo_profile_img');
+      const file = element_input.files[0];
+
+      previewImg.src = URL.createObjectURL(file);
+    }
   });
 }
 
