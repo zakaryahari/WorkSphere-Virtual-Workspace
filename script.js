@@ -39,3 +39,22 @@ if (add_employee_form) {
     }
   });
 }
+
+const Add_new_employee_form_container = document.querySelector('#Add-new-employee-form-container');
+
+Add_new_employee_form_container.addEventListener('click', (e) => {
+  if (e.target.id === 'Add-new-employee-form-container') {
+    const element_div = e.target;
+    if (!element_div.classList.contains('hidden')) {
+      element_div.classList.add('hidden');
+    }
+  }
+});
+
+const add_employee_btn = document.querySelector('.Add-new-employee');
+
+if (add_employee_btn) {
+  add_employee_btn.addEventListener('click', () => {
+    Add_new_employee_form_container.classList.toggle('hidden');
+  });
+}
