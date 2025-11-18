@@ -48,11 +48,12 @@ if (add_employee_form) {
 
       previewImg.src = URL.createObjectURL(file);
     }
-    // console.log(element_input.id);
-    // if (element_input.id === 'employee_close_input') {
-    //   // add_employee_form.reset();
-    //   Add_new_employee_form_container.classList.add('hidden');
-    // }
+    if (element_input.id === 'exp_first_date_input') {
+      const parent_div = e.target.closest('.inner-exp-container');
+      const end_date = parent_div.querySelector('#exp_end_date_input');
+      end_date.removeAttribute('disabled');
+      end_date.setAttribute('min', element_input.value);
+    }
   });
 }
 
@@ -95,29 +96,25 @@ function Add_employee_experience() {
   count_employee_experience += 1;
   const containerId = `exp_cont_${count_employee_experience}`;
   const element_child = `                
-                <div class="inner-exp-container col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6" id='${containerId}'>
-                  <div class="grid col-span-2 lg:grid-cols-4">
-                    <h3 class="text-1xl text-gray-800 mb-2 border-b pb-1 col-span-3">Expériences Professionnelles N°${count_employee_experience}:</h3>
-                    <button type="button" class="delete_exp_employee col-span-1 text-red-500 hover:text-red-700 font-bold text-xl leading-none p-1 text-end" id=${count_employee_experience} data-target-id='${containerId}'>&times;</button>
-                    <br />
-                    <!-- <h3 class="text-1xl text-gray-800 mb-2 border-b pb-1 col-span-1">Expériences Professionnelles:</h3> -->
-                  </div>
-
-                  <div class="col-span-1">
-                    <label for="exp_title_input" class="block">Titre du poste:</label>
-                    <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                <div class="inner-exp-container col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 bg-gray-400/50 p-3 my-2 rounded-lg" id="${containerId}">
+                  <div class="grid col-span-2">
+                    <button type="button" class="delete_exp_employee text-red-500 hover:text-red-700 font-bold text-xl leading-none p-1 text-end" id="${count_employee_experience}" data-target-id="${containerId}">&times;</button>
                   </div>
                   <div class="col-span-1">
-                    <label for="exp_title_input" class="block">Titre du poste:</label>
-                    <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                    <label for="exp_company_input" class="block">Entreprise:</label>
+                    <input type="text" id="exp_company_input" class="form_input outline-none w-full" />
                   </div>
                   <div class="col-span-1">
-                    <label for="exp_date_input" class="block">Date de début:</label>
-                    <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                    <label for="exp_role_input" class="block">Rôle:</label>
+                    <input type="text" id="exp_role_input" class="form_input outline-none w-full" />
                   </div>
                   <div class="col-span-1">
-                    <label for="exp_date_input" class="block">Date de début:</label>
-                    <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                    <label for="exp_first_date_input" class="block">Date de début:</label>
+                    <input type="date" id="exp_first_date_input" class="form_input outline-none w-full"/>
+                  </div>
+                  <div class="col-span-1">
+                    <label for="exp_end_date_input" class="block">Date fin:</label>
+                    <input type="date" id="exp_end_date_input" class="form_input outline-none w-full" disabled/>
                   </div>
                 </div>
                 `;
@@ -137,7 +134,7 @@ const experiences_container = document.getElementById('experiences_container');
 if (experiences_container) {
   experiences_container.addEventListener('click', (e) => {
     const element_val = e.target;
-    console.log(element_val.id);
+    // console.log(element_val.id);
     if (element_val.classList.contains('delete_exp_employee')) {
       // const inner_exp_container = document.querySelector(`.inner-exp-container#exp_cont_${element_val.id}`);
       let targetid = element_val.dataset.targetId;
@@ -150,3 +147,5 @@ function delete_employee_experience(ID) {
   const inner_exp_container = document.getElementById(ID);
   inner_exp_container.remove();
 }
+
+function Checkdata(startdate, enddate) {}
