@@ -107,13 +107,16 @@ body {
   justify-items: center;
   align-items: center;
 }
-
 .Form-container {
   background-color: white;
   width: 800px;
   padding: 25px;
   border-radius: 4px;
   box-shadow: 5px 5px 15px 5px #ffffff4d;
+  max-height: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 #add_employee_form {
@@ -138,6 +141,17 @@ body {
 .form_btn {
   padding: 15px;
   margin-bottom: 10px;
+}
+
+.Form-container::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+.Form-container::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Color of the handle */
+  border-radius: 4px; /* Rounded handle */
+}
+.Form-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
 }
 
 @media (min-width: 345px) and (max-width: 1023px) {
