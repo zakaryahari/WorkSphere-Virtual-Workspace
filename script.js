@@ -88,30 +88,65 @@ if (close_btn) {
   });
 }
 
+let count_employee_experience = 0;
+
 function Add_employee_experience() {
   const experiences_container = document.getElementById('experiences_container');
+  count_employee_experience += 1;
+  const containerId = `exp_cont_${count_employee_experience}`;
   const element_child = `                
-                <div class="col-span-1">
-                  <label for="exp_title_input" class="block">Titre du poste:</label>
-                  <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                <div class="inner-exp-container col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6" id='${containerId}'>
+                  <div class="grid col-span-2 lg:grid-cols-4">
+                    <h3 class="text-1xl text-gray-800 mb-2 border-b pb-1 col-span-3">Expériences Professionnelles N°${count_employee_experience}:</h3>
+                    <button type="button" class="delete_exp_employee col-span-1 text-red-500 hover:text-red-700 font-bold text-xl leading-none p-1 text-end" id=${count_employee_experience} data-target-id='${containerId}'>&times;</button>
+                    <br />
+                    <!-- <h3 class="text-1xl text-gray-800 mb-2 border-b pb-1 col-span-1">Expériences Professionnelles:</h3> -->
+                  </div>
+
+                  <div class="col-span-1">
+                    <label for="exp_title_input" class="block">Titre du poste:</label>
+                    <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                  </div>
+                  <div class="col-span-1">
+                    <label for="exp_title_input" class="block">Titre du poste:</label>
+                    <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                  </div>
+                  <div class="col-span-1">
+                    <label for="exp_date_input" class="block">Date de début:</label>
+                    <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                  </div>
+                  <div class="col-span-1">
+                    <label for="exp_date_input" class="block">Date de début:</label>
+                    <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                  </div>
                 </div>
-                <div class="col-span-1">
-                  <label for="exp_title_input" class="block">Titre du poste:</label>
-                  <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
-                </div>
-                <div class="col-span-1">
-                  <label for="exp_date_input" class="block">Date de début:</label>
-                  <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
-                </div>
-                <div class="col-span-1">
-                  <label for="exp_date_input" class="block">Date de début:</label>
-                  <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
-                </div>`;
+                `;
+  experiences_container.innerHTML += element_child;
 }
 
 const employee_experience_button = document.getElementById('employee_experience_button');
 
 if (employee_experience_button) {
-  employee_experience_button.addEventListener('click', () => {});
-  // experiences_container.innerHTML = '';
+  employee_experience_button.addEventListener('click', () => {
+    Add_employee_experience();
+  });
+}
+
+const experiences_container = document.getElementById('experiences_container');
+
+if (experiences_container) {
+  experiences_container.addEventListener('click', (e) => {
+    const element_val = e.target;
+    console.log(element_val.id);
+    if (element_val.classList.contains('delete_exp_employee')) {
+      // const inner_exp_container = document.querySelector(`.inner-exp-container#exp_cont_${element_val.id}`);
+      let targetid = element_val.dataset.targetId;
+      delete_employee_experience(targetid);
+    }
+  });
+}
+
+function delete_employee_experience(ID) {
+  const inner_exp_container = document.getElementById(ID);
+  inner_exp_container.remove();
 }
