@@ -108,6 +108,7 @@ function Valide_input_regex(inputElement, regex, span_id, msg_error) {
   const employee_nom_msg_error = document.getElementById(span_id);
   if (regex.test(inputElement.value)) {
     employee_nom_msg_error.textContent = '';
+    isvalid = true;
   }
   if (!regex.test(inputElement.value) && inputElement.value !== '') {
     employee_nom_msg_error.textContent = msg_error;
@@ -120,19 +121,21 @@ function Valide_input_regex(inputElement, regex, span_id, msg_error) {
   return isvalid;
 }
 
+let nom_regex = /^[A-Za-z]+(?:[\sA-Za-z]){2,}$/;
+let email_regex = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/;
+let phone_regex = /^(?:\+212|0|6)+\d{8,9}$/;
+
+const nom_msg_error = 'Please enter a valid name.';
+const email_msg_error = 'Please enter a valid Email.';
+const phone_msg_error = 'Please enter a valid phone number (10 digits).';
+const Role_msg_error = 'Please Correct the error of the input form';
+
+const nom_spanId = 'employee_nom_msg_error';
+const email_spanId = 'employee_email_msg_error';
+const phone_spanId = 'employee_tel_msg_error';
+const Role_spanId = 'employee_role_msg_error';
+
 if (add_employee_form) {
-  const nom_msg_error = 'Please enter a valid name.';
-  const email_msg_error = 'Please enter a valid Email.';
-  const phone_msg_error = 'Please enter a valid phone number (10 digits).';
-
-  const nom_spanId = 'employee_nom_msg_error';
-  const email_spanId = 'employee_email_msg_error';
-  const phone_spanId = 'employee_tel_msg_error';
-
-  let nom_regex = /^[A-Za-z]+(?:[\sA-Za-z]){2,}$/;
-  let email_regex = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/;
-  let phone_regex = /^(?:\+212|0|6)+\d{8,9}$/;
-
   add_employee_form.addEventListener('input', (e) => {
     const element_input = e.target;
     if (element_input.id === 'employee_nom_input') {
@@ -147,9 +150,7 @@ if (add_employee_form) {
 
     if (element_input.id === 'employee_photo_input') {
       const previewImg = document.getElementById('employee_photo_profile_img');
-      const file = element_input.files[0];
-
-      previewImg.src = URL.createObjectURL(file);
+      previewImg.src = element_input.value;
     }
     if (element_input.id === 'exp_first_date_input') {
       const parent_div = e.target.closest('.inner-exp-container');
@@ -209,7 +210,7 @@ function Add_employee_experience() {
                   </div>
                   <div class="col-span-1">
                     <label for="exp_role_input" class="block">Rôle:</label>
-                    <input type="text" id="exp_role_input" class="form_input outline-none w-full" />
+                    <input type="text" id="exp_role_input" class="form_input outline-none w-full" name="Exp_Role[]"/>
                   </div>
                   <div class="col-span-1">
                     <label for="exp_first_date_input" class="block">Date de début:</label>
@@ -274,5 +275,63 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
   });
+  const save_btn = document.getElementById('employee_save_input');
+  if (save_btn) {
+    save_btn.addEventListener('click', () => {
+      Valide_input_submit();
+    });
+  }
 });
-function Checkdata(startdate, enddate) {}
+
+function Valide_Radio_Option(inputElement, span_id, msg_error) {
+  let isvalid = true;
+  const employee_role_msg_error = document.getElementById(span_id);
+  if (inputElement.value === 'Default_option') {
+    employee_role_msg_error.textContent = msg_error;
+    isvalid = false;
+  }
+  if (inputElement.value === '') {
+    employee_role_msg_error.textContent = '';
+    isvalid = false;
+  }
+  return isvalid;
+}
+
+function Valide_experience() {
+  const Company_array = document.querySelectorAll('input[name="Exp_Entreprise[]"]');
+  console.log(Company_array);
+}
+
+function Valide_input_submit() {
+  let isvalid = false;
+  const employee_nom_input = document.getElementById('employee_nom_input');
+  const employee_role_input = document.getElementById('employee_role_input');
+  const employee_photo_input = document.getElementById('employee_photo_input');
+  const employee_email_input = document.getElementById('employee_email_input');
+  const employee_tel_input = document.getElementById('employee_tel_input');
+
+  const nom = Valide_input_regex(employee_nom_input, nom_regex, nom_spanId, nom_msg_error);
+
+  const email = Valide_input_regex(employee_email_input, email_regex, email_spanId, email_msg_error);
+
+  const tel = Valide_input_regex(employee_tel_input, phone_regex, phone_spanId, phone_msg_error);
+
+  console.log(employee_role_input.value);
+
+  if (employee_photo_input.value === '') {
+    const previewImg = document.getElementById('employee_photo_profile_img');
+    previewImg.src = 'images/profile/profile-default.jpg';
+  }
+
+  isvalid = Valide_Radio_Option(employee_role_input, Role_spanId, Role_msg_error);
+
+  if (!nom || !email || !tel || !isvalid) {
+    alert('Please Fix the errors in the form');
+    return;
+  }
+
+  // const inner_exp_container = document.getElementById('inner-exp-container');
+  // if (inner_exp_container) {
+  //   Valide_experience();
+  // }
+}
