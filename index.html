@@ -12,31 +12,15 @@
   </head>
   <body>
     <main class="grid grid-cols-1 lg:grid-cols-4 min-h-screen">
-      <div class="side-bar lg:col-span-1 bg-orange-50 p-6 shadow-2xl rounded-lg h-full">
-        <h1 class="text-2xl">List Des Employee</h1>
-        <hr />
-        <div class="list-employee">
-          <div class="side-bar-employee-card bg-orange-300 my-6 p-3 rounded-lg grid grid-cols-[auto_1fr_auto] gap-x-5">
-            <div class="profile-img">
-              <img src="images/profile/profile-default.jpg" alt="profile-default" class="w-[100px] rounded-full" />
-            </div>
-            <div class="profile-info content-center">
-              <h1 class="text-2xl">zakarya hari</h1>
-              <p class="text-2xl">it guy</p>
-            </div>
-            <div class="content-center">
-              <button class="text-2xl bg-orange-500 mx-6 p-3 rounded">
-                <u>edit</u>
-              </button>
-            </div>
-          </div>
+      <div class="lg:col-span-1 bg-gray-800 p-6 rounded-xl h-full shadow-2xl flex flex-col space-y-8 border-r border-gray-700" id="All_Employee_List">
+        <div class="border-b border-gray-700">
+          <h2 class="text-2xl font-extrabold text-white tracking-wider">WorkSphere - <span class="text-blue-400">Virtual Workspace</span></h2>
         </div>
-        <button class="Add-new-employee bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-md text-2xl">
-          <i>+</i>
-          Ajouter neveau employee
-        </button>
+        <div id="Display_Employee_list"></div>
+
+        <button class="Add-new-employee bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-md text-2xl px-4 py-4">+ Ajouter neveau employee</button>
       </div>
-      <div class="etage-floor lg:col-span-3">
+      <div class="etage-floor lg:col-span-3 w-full">
         <div class="map-img relative">
           <img src="images/bg/plan-69159a65c5684763515973.jpg" alt="bg-map" id="img-desktop" />
           <img src="images/bg/plan-rotated.jpg" alt="bg-map" id="img-mobile" />
@@ -75,7 +59,7 @@
             <div class="lg:col-span-1 mx-4">
               <label for="employee_role_input" class="block">Rôle:</label>
               <select id="employee_role_input" class="form_input px-4 py-2 outline-none w-full">
-                <option value="" disabled selected>Sélectionner un rôle</option>
+                <option value="Default_option" selected>Sélectionner un rôle</option>
                 <option value="Réceptionniste">Réceptionniste</option>
                 <option value="Technicien IT">Technicien IT</option>
                 <option value="Agent de sécurité">Agent de sécurité</option>
@@ -83,15 +67,15 @@
                 <option value="Nettoyage">Nettoyage</option>
                 <option value="Autre">Autre (Accès libre)</option>
               </select>
+              <span id="employee_role_msg_error" class="text-red-900"></span>
             </div>
             <br />
-            <!-- <span id="employee_nom_msg_error" class="text-red-900">msg d'error</span> -->
             <div class="lg:col-span-2 mx-4">
               <label for="employee_photo_input" class="block">Photo:</label>
               <!-- <input type="file" id="employee_photo_input" class="form_input" /> -->
               <!-- <img src="images/profile/profile-default.jpg" alt="" class="w-[100px] rounded-full borber-dashed" id="employee_photo_profile" /> -->
               <div class="grid lg:grid-cols-3 items-center space-x-4 mb-4">
-                <input type="file" id="employee_photo_input" class="form_input outline-none col-span-2 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+                <input type="text" id="employee_photo_input" placeholder="URL Link..." class="form_input outline-none col-span-2" required />
                 <img src="images/profile/profile-default.jpg" alt="Profile Preview" class="w-20 h-20 col-span-1 rounded-full border-2 border-dashed border-gray-400 object-cover" id="employee_photo_profile_img" />
               </div>
             </div>
@@ -110,7 +94,29 @@
 
             <div class="col-span-2 mx-4">
               <h3 class="text-xl font-bold text-gray-800 mb-2 border-b pb-1">Expériences Professionnelles:</h3>
-              <div id="experiences_container"></div>
+              <div id="experiences_container">
+                <!-- <div class="inner-exp-container col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 bg-gray-400/50 p-3 rounded-lg" id="${containerId}">
+                  <div class="grid col-span-2">
+                    <button type="button" class="delete_exp_employee text-red-500 hover:text-red-700 font-bold text-xl leading-none p-1 text-end" id="${count_employee_experience}" data-target-id="${containerId}">&times;</button>
+                  </div>
+                  <div class="col-span-1">
+                    <label for="exp_title_input" class="block">Entreprise:</label>
+                    <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                  </div>
+                  <div class="col-span-1">
+                    <label for="exp_title_input" class="block">Rôle:</label>
+                    <input type="text" id="exp_title_input" class="form_input outline-none w-full" />
+                  </div>
+                  <div class="col-span-1">
+                    <label for="exp_date_input" class="block">Date de début:</label>
+                    <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                  </div>
+                  <div class="col-span-1">
+                    <label for="exp_date_input" class="block">Date de début:</label>
+                    <input type="date" id="exp_date_input" class="form_input outline-none w-full" />
+                  </div>
+                </div> -->
+              </div>
             </div>
             <div class="col-span-2">
               <br />
