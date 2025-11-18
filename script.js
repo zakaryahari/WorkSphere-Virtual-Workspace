@@ -1,3 +1,106 @@
+let list_employee = [
+  {
+    id: 1001,
+    nom: 'Hassan Tawni',
+    role: 'Manager',
+    email: 'hassan.tawni@example.com',
+    tel: '0612345678',
+    photo: 'https://randomuser.me/api/portraits/men/44.jpg',
+    experiences: [
+      {
+        exp_id: 1,
+        company: 'Aziz Adel',
+        role_exp: 'Chef de projet',
+        date_start: '2020-01-15',
+        date_end: '2024-05-30',
+      },
+    ],
+  },
+  {
+    id: 1002,
+    nom: 'Abdo Gouglou',
+    role: 'Réceptionniste',
+    email: 'abdo.gouglou@hotel.fr',
+    tel: '0798765432',
+    photo: 'https://randomuser.me/api/portraits/men/8.jpg',
+    experiences: [
+      {
+        exp_id: 2,
+        company: 'Grand Hotel Paris',
+        role_exp: 'Assistante administrative',
+        date_start: '2022-08-01',
+        date_end: '2023-07-31',
+      },
+    ],
+  },
+  {
+    id: 1003,
+    nom: 'Samir Tawrdi',
+    role: 'Technicien IT',
+    email: 'samir.tawrdi@techcorp.com',
+    tel: '0665544332',
+    photo: 'https://randomuser.me/api/portraits/men/1.jpg',
+    experiences: [
+      {
+        exp_id: 3,
+        company: 'Digital Connect',
+        role_exp: 'Support technique',
+        date_start: '2023-03-10',
+        date_end: '2025-11-18',
+      },
+    ],
+  },
+  {
+    id: 1004,
+    nom: 'Ahmed Somali',
+    role: 'Agent de sécurité',
+    email: 'ahmed.somali@securite.org',
+    tel: '0620304050',
+    photo: 'https://randomuser.me/api/portraits/men/50.jpg',
+    experiences: [],
+  },
+  {
+    id: 1005,
+    nom: 'Khadim Omar',
+    role: 'Autre',
+    email: 'omar.khadim@service.ma',
+    tel: '0651627384',
+    photo: 'https://randomuser.me/api/portraits/men/9.jpg',
+    experiences: [
+      {
+        exp_id: 4,
+        company: 'City Maintenance',
+        role_exp: 'Plombier certifié',
+        date_start: '2018-05-01',
+        date_end: '2020-12-31',
+      },
+      {
+        exp_id: 5,
+        company: 'Global Services',
+        role_exp: "Chef d'équipe",
+        date_start: '2021-01-01',
+        date_end: '2023-01-31',
+      },
+    ],
+  },
+  {
+    id: 1006,
+    nom: 'Dubois Caroline',
+    role: 'Nettoyage',
+    email: 'caro.dubois@clean.fr',
+    tel: '0711223344',
+    photo: 'https://randomuser.me/api/portraits/women/66.jpg',
+    experiences: [],
+  },
+];
+
+let zone_conference_array = [];
+let zone_reception_array = [];
+let zone_serveurs_array = [];
+let zone_securite_array = [];
+let zone_personnel_array = [];
+let zone_archives_array = [];
+
 const add_employee_form = document.querySelector('#add_employee_form');
 
 function Valide_input_regex(inputElement, regex, span_id, msg_error) {
@@ -148,4 +251,28 @@ function delete_employee_experience(ID) {
   inner_exp_container.remove();
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const All_Employee_List = document.getElementById('Display_Employee_list');
+  list_employee.forEach((employee) => {
+    All_Employee_List.innerHTML += `
+        <div class="list-employee" id=${employee.id}>
+          <div class="bg-white shadow-lg border border-gray-100 p-4 my-6 rounded-xl grid grid-cols-[auto_1fr_auto] gap-x-5 items-center transition duration-300 hover:shadow-xl">
+            <div class="profile-img">
+              <img src=${employee.photo} alt="profile-default" class="w-20 h-20 object-cover rounded-full ring-2 ring-blue-500/50" />
+            </div>
+
+            <div class="profile-info truncate">
+              <h1 class="text-xl font-semibold text-gray-800 truncate">${employee.nom}</h1>
+              <p class="text-sm text-blue-600 font-medium truncate">${employee.role}</p>
+            </div>
+            <div class="content-center">
+              <button class="bg-blue-500 hover:bg-blue-600 text-white text-base font-medium py-2 px-4 rounded-full shadow-md transition duration-200">
+                <span class="underline-offset-4 decoration-2">Éditer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+    `;
+  });
+});
 function Checkdata(startdate, enddate) {}
