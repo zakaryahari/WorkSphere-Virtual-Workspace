@@ -448,3 +448,38 @@ function Filter_Employee_By_Role(Role) {
 
   Display_Employee_By_Role(Filtred_employee_by_role);
 }
+
+function Display_Employee_By_Role(Filtred_array) {
+  const Display_Employee_by_role_container = document.querySelector('.Display_Employee_by_role_container');
+  const parent_div = Display_Employee_by_role_container.closest('#Display_Employee_by_zonerole');
+  parent_div.classList.remove('hidden');
+  Display_Employee_by_role_container.innerHTML = '';
+  Filtred_array.forEach((element) => {
+    Display_Employee_by_role_container.innerHTML += `
+            <div class="lg:col-span-1 list-employee mx-3" id="${element.id}">
+              <div class="bg-white shadow-lg border border-gray-100 p-4 my-6 rounded-xl grid grid-cols-[auto_1fr_auto] gap-x-5 items-center transition duration-300 hover:shadow-xl">
+                <div class="profile-img">
+                  <img src=${element.photo} alt="profile-default" class="w-20 h-20 object-cover rounded-full ring-2 ring-blue-500/50" />
+                </div>
+
+                <div class="profile-info truncate">
+                  <h1 class="text-xl font-semibold text-gray-800 truncate">${element.nom}</h1>
+                  <p class="text-sm text-blue-600 font-medium truncate">${element.role}</p>
+                </div>
+              </div>
+            </div>
+    `;
+    console.log(element);
+  });
+}
+
+const Display_Employee_by_zonerole = document.querySelector('#Display_Employee_by_zonerole');
+
+Display_Employee_by_zonerole.addEventListener('click', (e) => {
+  if (e.target.id === 'Display_Employee_by_zonerole') {
+    const element_div = e.target;
+    if (!element_div.classList.contains('hidden')) {
+      element_div.classList.add('hidden');
+    }
+  }
+});
