@@ -414,3 +414,37 @@ function Display_Employee_list_SideBar() {
     `;
   });
 }
+
+const map_content = document.querySelector('.map-content');
+
+if (map_content) {
+  map_content.addEventListener('click', (e) => {
+    const selected_element = e.target;
+    if (selected_element.classList.contains('zone_btn')) {
+      // console.log(selected_element.closest('.zone'));
+      Filter_Employee_By_Role(selected_element.closest('.zone').id);
+    }
+  });
+}
+
+function Filter_Employee_By_Role(Role) {
+  let Filtred_employee_by_role = [];
+  ZONE_RULES.forEach((zone) => {
+    if (zone.id === Role) {
+      zone.allowedRoles.forEach((allowed) => {
+        list_employee.forEach((employee) => {
+          if (employee.role === allowed) {
+            Filtred_employee_by_role.push(employee);
+          }
+          console.log(allowed);
+        });
+        // Filtred_employee_by_role;
+      });
+    }
+  });
+
+  console.log('-----------');
+  console.log(Filtred_employee_by_role);
+
+  Display_Employee_By_Role(Filtred_employee_by_role);
+}
