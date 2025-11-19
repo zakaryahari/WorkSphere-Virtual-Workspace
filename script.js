@@ -1,16 +1,16 @@
 let list_employee = [
   {
     id: 1001,
-    nom: 'Hassan Tawni',
+    nom: 'Aziz Adel',
     role: 'Manager',
-    email: 'hassan.tawni@example.com',
+    email: 'Aziz.adel@gmail.com',
     tel: '0612345678',
-    photo: 'https://randomuser.me/api/portraits/men/44.jpg',
+    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQGKxD9UqneVwQ/profile-displayphoto-shrink_200_200/B4EZZIq4WgG0AY-/0/1744975923550?e=1765411200&v=beta&t=zLTQhOIX6n-NzODzxNiKq6qD_xKycubaLiKMB9z-NjM',
     isactive: null,
     experiences: [
       {
         exp_id: 1,
-        company: 'Aziz Adel',
+        company: 'Intic Solutions',
         role_exp: 'Chef de projet',
         date_start: '2020-01-15',
         date_end: '2024-05-30',
@@ -23,12 +23,12 @@ let list_employee = [
     role: 'Réceptionniste',
     email: 'abdo.gouglou@hotel.fr',
     tel: '0798765432',
-    photo: 'https://randomuser.me/api/portraits/men/8.jpg',
+    photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFsTAM_4QnuI1kIcugaJHVj3Yo6_UJKKGYjA&s',
     isactive: null,
     experiences: [
       {
         exp_id: 2,
-        company: 'Grand Hotel Paris',
+        company: 'WeSurfSkateMorocco',
         role_exp: 'Assistante administrative',
         date_start: '2022-08-01',
         date_end: '2023-07-31',
@@ -37,16 +37,16 @@ let list_employee = [
   },
   {
     id: 1003,
-    nom: 'Samir Tawrdi',
+    nom: 'Zakarya hari',
     role: 'Technicien IT',
-    email: 'samir.tawrdi@techcorp.com',
+    email: 'zakariahari42@gmail.com',
     tel: '0665544332',
-    photo: 'https://randomuser.me/api/portraits/men/1.jpg',
+    photo: 'https://intranet.youcode.ma/storage/users/profile/thumbnail/1684-1760996356.png',
     isactive: null,
     experiences: [
       {
         exp_id: 3,
-        company: 'Digital Connect',
+        company: 'YouCode',
         role_exp: 'Support technique',
         date_start: '2023-03-10',
         date_end: '2025-11-18',
@@ -57,7 +57,7 @@ let list_employee = [
     id: 1004,
     nom: 'Ahmed Somali',
     role: 'Agent de sécurité',
-    email: 'ahmed.somali@securite.org',
+    email: 'ahmed.somali@gmail.com',
     tel: '0620304050',
     photo: 'https://randomuser.me/api/portraits/men/50.jpg',
     isactive: null,
@@ -476,10 +476,76 @@ function Display_Employee_By_Role(Filtred_array) {
 const Display_Employee_by_zonerole = document.querySelector('#Display_Employee_by_zonerole');
 
 Display_Employee_by_zonerole.addEventListener('click', (e) => {
-  if (e.target.id === 'Display_Employee_by_zonerole') {
+  let element_target = e.target;
+  if (element_target.id === 'Display_Employee_by_zonerole') {
+    const element_div = e.target;
+    if (!element_div.classList.contains('hidden')) {
+      element_div.classList.add('hidden');
+    }
+  }
+
+  if (element_target.closest('.list-employee')) {
+    element_target = element_target.closest('.list-employee').id;
+    console.log(element_target);
+  }
+});
+
+
+// if (Display_Employee_by_sidebar_container) {
+//   Display_Employee_by_sidebar_container.addEventListener('click',(e)=>{
+
+//   });
+// }
+
+const Display_Employee_by_sidebar = document.querySelector('#Display_Employee_by_sidebar');
+
+Display_Employee_by_sidebar.addEventListener('click', (e) => {
+  let element_target = e.target;
+  if (element_target.id === 'Display_Employee_by_sidebar') {
     const element_div = e.target;
     if (!element_div.classList.contains('hidden')) {
       element_div.classList.add('hidden');
     }
   }
 });
+const Display_Employee_list = document.getElementById('Display_Employee_list');
+
+if (Display_Employee_list) {
+  Display_Employee_list.addEventListener('click',(e)=>{
+    if (e.target.closest('.list-employee')) {
+      // console.log(e.target.closest('.list-employee').id);
+      const Display_Employee_by_sidebar = document.getElementById('Display_Employee_by_sidebar');
+      Display_Employee_by_sidebar.classList.remove('hidden');
+      Display_Employee_cv(e.target.closest('.list-employee').id);
+    }
+  });
+}
+
+function Display_Employee_cv(ID) {
+  const Display_Employee_by_sidebar_container = document.querySelector('.Display_Employee_by_sidebar_container');
+  list_employee.forEach(employee => {
+    if (employee.id == ID) {
+      Display_Employee_by_sidebar_container.innerHTML = '';
+      Display_Employee_by_sidebar_container.innerHTML += `          
+          <div class="lg:col-span-2 justify-items-center pb-2">
+            <img src=${employee.photo} alt="Profile Preview" class="w-[250px] h-[250px] rounded-full border-2 border-dashed border-gray-400 object-cover" id="employee_photo_profile_img" />
+          </div>
+          <div class="lg:col-span-1 p-8 bg-gray-800 p-4 rounded-lg border border-gray-700">
+            <h2 class="text-2xl font-extrabold text-white tracking-wider">Name : <span class="text-blue-400">${employee.nom}</span></h2>
+          </div>
+          <div class="lg:col-span-1 p-8 bg-gray-800 p-4 rounded-lg border border-gray-700">
+            <h2 class="text-2xl font-extrabold text-white tracking-wider">Role : <span class="text-blue-400">${employee.role}</span></h2>
+          </div>
+          <div class="lg:col-span-1 p-8 bg-gray-800 p-4 rounded-lg border border-gray-700">
+            <h2 class="text-2xl font-extrabold text-white tracking-wider">Email : <span class="text-blue-400">${employee.email}</span></h2>
+          </div>
+          <div class="lg:col-span-1 p-8 bg-gray-800 p-4 rounded-lg border border-gray-700">
+            <h2 class="text-2xl font-extrabold text-white tracking-wider">Télephone : <span class="text-blue-400">${employee.tel}</span></h2>
+          </div>`;
+    }
+  });
+}
+
+function Add_employee_to_zone(ID , Zono_id ,Zone_array) {
+  
+}
