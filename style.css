@@ -122,7 +122,8 @@ body {
   justify-items: center;
   align-items: center;
 }
-.Form-container {
+.Form-container,
+.Display_Employee_by_role_container {
   background-color: white;
   width: 800px;
   padding: 25px;
