@@ -6,6 +6,7 @@ let list_employee = [
     email: 'hassan.tawni@example.com',
     tel: '0612345678',
     photo: 'https://randomuser.me/api/portraits/men/44.jpg',
+    isactive: null,
     experiences: [
       {
         exp_id: 1,
@@ -23,6 +24,7 @@ let list_employee = [
     email: 'abdo.gouglou@hotel.fr',
     tel: '0798765432',
     photo: 'https://randomuser.me/api/portraits/men/8.jpg',
+    isactive: null,
     experiences: [
       {
         exp_id: 2,
@@ -40,6 +42,7 @@ let list_employee = [
     email: 'samir.tawrdi@techcorp.com',
     tel: '0665544332',
     photo: 'https://randomuser.me/api/portraits/men/1.jpg',
+    isactive: null,
     experiences: [
       {
         exp_id: 3,
@@ -57,6 +60,7 @@ let list_employee = [
     email: 'ahmed.somali@securite.org',
     tel: '0620304050',
     photo: 'https://randomuser.me/api/portraits/men/50.jpg',
+    isactive: null,
     experiences: [],
   },
   {
@@ -66,6 +70,7 @@ let list_employee = [
     email: 'omar.khadim@service.ma',
     tel: '0651627384',
     photo: 'https://randomuser.me/api/portraits/men/9.jpg',
+    isactive: null,
     experiences: [
       {
         exp_id: 4,
@@ -90,7 +95,46 @@ let list_employee = [
     email: 'caro.dubois@clean.fr',
     tel: '0711223344',
     photo: 'https://randomuser.me/api/portraits/women/66.jpg',
+    isactive: null,
     experiences: [],
+  },
+];
+const ZONE_RULES = [
+  {
+    id: 'zone-conference',
+    name: 'Salle de Conférence',
+    nombre_max: 8,
+    allowedRoles: ['Manager', 'Autre', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité', 'Nettoyage'],
+  },
+  {
+    id: 'zone-reception',
+    name: 'Réception',
+    nombre_max: 7,
+    allowedRoles: ['Réceptionniste', 'Manager'],
+  },
+  {
+    id: 'zone-serveurs',
+    name: 'Salle des Serveurs',
+    nombre_max: 3,
+    allowedRoles: ['Technicien IT', 'Manager'],
+  },
+  {
+    id: 'zone-securite',
+    name: 'Salle de Sécurité',
+    nombre_max: 3,
+    allowedRoles: ['Agent de sécurité', 'Manager'],
+  },
+  {
+    id: 'zone-personnel',
+    name: 'Salle du Personnel',
+    nombre_max: 2,
+    allowedRoles: ['Manager', 'Autre', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité', 'Nettoyage'],
+  },
+  {
+    id: 'zone-archives',
+    name: "Salle d'Archives",
+    nombre_max: 4,
+    allowedRoles: ['Manager', 'Autre', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité'],
   },
 ];
 
@@ -150,7 +194,11 @@ if (add_employee_form) {
 
     if (element_input.id === 'employee_photo_input') {
       const previewImg = document.getElementById('employee_photo_profile_img');
-      previewImg.src = element_input.value;
+      if (element_input.value.trim() !== '') {
+        previewImg.src = element_input.value;
+      } else {
+        previewImg.src = 'images/profile/profile-default.jpg';
+      }
     }
     if (element_input.id === 'exp_first_date_input') {
       const parent_div = e.target.closest('.inner-exp-container');
@@ -253,28 +301,7 @@ function delete_employee_experience(ID) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const All_Employee_List = document.getElementById('Display_Employee_list');
-  list_employee.forEach((employee) => {
-    All_Employee_List.innerHTML += `
-        <div class="list-employee" id=${employee.id}>
-          <div class="bg-white shadow-lg border border-gray-100 p-4 my-6 rounded-xl grid grid-cols-[auto_1fr_auto] gap-x-5 items-center transition duration-300 hover:shadow-xl">
-            <div class="profile-img">
-              <img src=${employee.photo} alt="profile-default" class="w-20 h-20 object-cover rounded-full ring-2 ring-blue-500/50" />
-            </div>
-
-            <div class="profile-info truncate">
-              <h1 class="text-xl font-semibold text-gray-800 truncate">${employee.nom}</h1>
-              <p class="text-sm text-blue-600 font-medium truncate">${employee.role}</p>
-            </div>
-            <div class="content-center">
-              <button class="bg-blue-500 hover:bg-blue-600 text-white text-base font-medium py-2 px-4 rounded-full shadow-md transition duration-200">
-                <span class="underline-offset-4 decoration-2">Éditer</span>
-              </button>
-            </div>
-          </div>
-        </div>
-    `;
-  });
+  Display_Employee_list_SideBar();
   const save_btn = document.getElementById('employee_save_input');
   if (save_btn) {
     save_btn.addEventListener('click', () => {
@@ -329,9 +356,61 @@ function Valide_input_submit() {
     alert('Please Fix the errors in the form');
     return;
   }
+  Add_employee_data();
+  Display_Employee_list_SideBar();
+  add_employee_form.reset();
+  Add_new_employee_form_container.classList.add('hidden');
 
   // const inner_exp_container = document.getElementById('inner-exp-container');
   // if (inner_exp_container) {
   //   Valide_experience();
   // }
+}
+
+function NextID() {
+  // console.log(list_employee.length);
+  let Nid = list_employee[list_employee.length - 1].id;
+  ++Nid;
+  console.log(Nid);
+  return Nid;
+}
+
+function Add_employee_data() {
+  const employee_nom_input = document.getElementById('employee_nom_input').value;
+  const employee_role_input = document.getElementById('employee_role_input').value;
+  const employee_photo_input = document.getElementById('employee_photo_input').value;
+  const employee_email_input = document.getElementById('employee_email_input').value;
+  const employee_tel_input = document.getElementById('employee_tel_input').value;
+
+  let Id_employee = NextID();
+
+  const employee_object = {id: Id_employee, nom: employee_nom_input, role: employee_role_input, email: employee_email_input, tel: employee_tel_input, photo: employee_photo_input, isactive: null, experiences: {}};
+  list_employee.push(employee_object);
+  console.log(list_employee[list_employee.length - 1]);
+}
+
+function Display_Employee_list_SideBar() {
+  const All_Employee_List = document.getElementById('Display_Employee_list');
+  All_Employee_List.innerHTML = '';
+  list_employee.forEach((employee) => {
+    All_Employee_List.innerHTML += `
+        <div class="list-employee" id=${employee.id}>
+          <div class="bg-white shadow-lg border border-gray-100 p-4 my-6 rounded-xl grid grid-cols-[auto_1fr_auto] gap-x-5 items-center transition duration-300 hover:shadow-xl">
+            <div class="profile-img">
+              <img src=${employee.photo} alt="profile-default" class="w-20 h-20 object-cover rounded-full ring-2 ring-blue-500/50" />
+            </div>
+
+            <div class="profile-info truncate">
+              <h1 class="text-xl font-semibold text-gray-800 truncate">${employee.nom}</h1>
+              <p class="text-sm text-blue-600 font-medium truncate">${employee.role}</p>
+            </div>
+            <div class="content-center">
+              <button class="bg-blue-500 hover:bg-blue-600 text-white text-base font-medium py-2 px-4 rounded-full shadow-md transition duration-200">
+                <span class="underline-offset-4 decoration-2">Éditer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+    `;
+  });
 }
