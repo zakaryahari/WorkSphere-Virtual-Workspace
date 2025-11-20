@@ -415,6 +415,8 @@ function Display_Employee_list_SideBar() {
   });
 }
 
+let Clicked_btn_zone_id;
+
 const map_content = document.querySelector('.map-content');
 
 if (map_content) {
@@ -422,8 +424,11 @@ if (map_content) {
     const selected_element = e.target;
     if (selected_element.classList.contains('zone_btn')) {
       // console.log(selected_element.closest('.zone'));
+      Clicked_btn_zone_id = selected_element.closest('.zone').id;
       Filter_Employee_By_Role(selected_element.closest('.zone').id);
     }
+    // if (selected_element.classList.contains('.employee_cercle')) {
+    // }
   });
 }
 
@@ -485,11 +490,17 @@ Display_Employee_by_zonerole.addEventListener('click', (e) => {
   }
 
   if (element_target.closest('.list-employee')) {
-    element_target = element_target.closest('.list-employee').id;
-    console.log(element_target);
+    // element_target = element_target.closest('.list-employee').id;
+    let id_list = element_target.closest('.list-employee').id;
+
+    console.log(element_target.closest('.list-employee').id);
+    console.log(Clicked_btn_zone_id);
+
+    if (Clicked_btn_zone_id === 'zone-conference') {
+      Add_employee_to_zone(id_list, Clicked_btn_zone_id, zone_conference_array);
+    }
   }
 });
-
 
 // if (Display_Employee_by_sidebar_container) {
 //   Display_Employee_by_sidebar_container.addEventListener('click',(e)=>{
@@ -511,7 +522,7 @@ Display_Employee_by_sidebar.addEventListener('click', (e) => {
 const Display_Employee_list = document.getElementById('Display_Employee_list');
 
 if (Display_Employee_list) {
-  Display_Employee_list.addEventListener('click',(e)=>{
+  Display_Employee_list.addEventListener('click', (e) => {
     if (e.target.closest('.list-employee')) {
       // console.log(e.target.closest('.list-employee').id);
       const Display_Employee_by_sidebar = document.getElementById('Display_Employee_by_sidebar');
@@ -523,7 +534,7 @@ if (Display_Employee_list) {
 
 function Display_Employee_cv(ID) {
   const Display_Employee_by_sidebar_container = document.querySelector('.Display_Employee_by_sidebar_container');
-  list_employee.forEach(employee => {
+  list_employee.forEach((employee) => {
     if (employee.id == ID) {
       Display_Employee_by_sidebar_container.innerHTML = '';
       Display_Employee_by_sidebar_container.innerHTML += `          
@@ -546,6 +557,45 @@ function Display_Employee_cv(ID) {
   });
 }
 
-function Add_employee_to_zone(ID , Zono_id ,Zone_array) {
-  
+function Add_employee_to_zone(ID, Zono_id, Zone_array) {
+  Zone_array.push(ID);
+
+  const Zone_container = document.getElementById(Zono_id);
+
+  let child_zone = Zone_container.querySelector('.zone_employee_minilist_display');
+
+  child_zone.innerHTML += '';
+
+  list_employee.forEach((employee) => {
+    if (employee.id == ID) {
+      child_zone.innerHTML += `
+                  <div class="employee_cercle grid lg:grid-rows-1">
+                    <div class="flex items-center lg:row-span-1 p-1 bg-gray-700 rounded-lg">
+                      <div class="employee_cercle w-8 h-8 flex-shrink-0">
+                        <img src=${employee.photo} alt="${employee.name}" class="rounded-full object-cover w-full h-full ring-1 ring-blue-400/70 mr-2" />
+                      </div>
+                      <div class="ml-2 flex-grow min-w-0 truncate">
+                        <p class="text-sm font-semibold text-white truncate">${employee.name}</p>
+                      </div>
+                    </div>
+                  </div>`;
+    }
+  });
+
+  console.log();
 }
+
+// const zone_employee_minilist_display = document.querySelector('.zone_employee_minilist_display');
+
+// if (zone_employee_minilist_display) {
+// }
+
+// const Display_Employee_by_role_container = document.querySelector('.Display_Employee_by_role_container');
+
+// if (Display_Employee_by_role_container) {
+//   Display_Employee_by_role_container.addEventListener('click', (e) => {
+//     if (e.target.closest('.list-employee')) {
+//       console.log(e.target.closest('.list-employee'));
+//     }
+//   });
+// }
