@@ -206,11 +206,18 @@ if (add_employee_form) {
         previewImg.src = 'images/profile/profile-default.jpg';
       }
     }
-    if (element_input.id === 'exp_first_date_input') {
+    if (element_input.closest('.exp_start_date_input')) {
+      console.log('yeah the date it worked .');
       const parent_div = e.target.closest('.inner-exp-container');
-      const end_date = parent_div.querySelector('#exp_end_date_input');
+      const end_date = parent_div.querySelector('.exp_end_date_input');
+      const start_date = parent_div.querySelector('.exp_start_date_input');
       end_date.removeAttribute('disabled');
-      end_date.setAttribute('min', element_input.value);
+      // Check_date(start_date.value, end_date.value);
+      let stringmindate = Check_date(start_date.value);
+      end_date.setAttribute('min', stringmindate);
+      let today = new Date();
+      today = today.toISOString().slice(0, 10);
+      end_date.setAttribute('max', today);
     }
   });
 }
@@ -259,24 +266,24 @@ function Add_employee_experience() {
                     <button type="button" class="delete_exp_employee text-red-500 hover:text-red-700 font-bold text-xl leading-none p-1 text-end" id="${count_employee_experience}" data-target-id="${containerId}">&times;</button>
                   </div>
                   <div class="col-span-1">
-                    <label for="exp_company_input" class="block">Entreprise:</label>
-                    <input type="text" id="exp_company_input" class="form_input outline-none w-full" />
+                    <label class="block">Entreprise:</label>
+                    <input type="text" class="exp_company_input form_input outline-none w-full" name="Exp_Entreprise[${count_employee_experience}]"/>
                   </div>
                   <div class="col-span-1">
-                    <label for="exp_role_input" class="block">Rôle:</label>
-                    <input type="text" id="exp_role_input" class="form_input outline-none w-full" name="Exp_Role[]"/>
+                    <label  class="block">Rôle:</label>
+                    <input type="text" class="exp_role_input form_input outline-none w-full" name="Exp_Role[${count_employee_experience}]"/>
                   </div>
                   <div class="col-span-1">
-                    <label for="exp_first_date_input" class="block">Date de début:</label>
-                    <input type="date" id="exp_first_date_input" class="form_input outline-none w-full"/>
+                    <label class="block">Date de début:</label>
+                    <input type="date" class="exp_start_date_input form_input outline-none w-full" name="Exp_Start_date[${count_employee_experience}]"/>
                   </div>
                   <div class="col-span-1">
-                    <label for="exp_end_date_input" class="block">Date fin:</label>
-                    <input type="date" id="exp_end_date_input" class="form_input outline-none w-full" disabled/>
+                    <label class="block">Date fin:</label>
+                    <input type="date" class="exp_end_date_input form_input outline-none w-full" name="Exp_End_date[${count_employee_experience}]" disabled/>
                   </div>
                 </div>
                 `;
-  experiences_container.innerHTML += element_child;
+  experiences_container.insertAdjacentHTML('beforeend', element_child);
 }
 
 const employee_experience_button = document.getElementById('employee_experience_button');
@@ -297,6 +304,12 @@ if (experiences_container) {
       // const inner_exp_container = document.querySelector(`.inner-exp-container#exp_cont_${element_val.id}`);
       let targetid = element_val.dataset.targetId;
       delete_employee_experience(targetid);
+    }
+  });
+  experiences_container.addEventListener('input', (e) => {
+    const element_val = e.target;
+
+    if (element_val.classList.contains('exp_company_input')) {
     }
   });
 }
@@ -641,22 +654,14 @@ function Add_employee_to_zone(ID, Zono_id) {
                   </div>`;
     }
   });
-  // Display_Employee_by_zonerole();
 
   console.log();
 }
 
-// const zone_employee_minilist_display = document.querySelector('.zone_employee_minilist_display');
+function Check_date(StartDate) {
+  const dateObject = new Date(`${StartDate}T00:00:00`);
 
-// if (zone_employee_minilist_display) {
-// }
+  dateObject.setDate(dateObject.getDate() + 2);
 
-// const Display_Employee_by_role_container = document.querySelector('.Display_Employee_by_role_container');
-
-// if (Display_Employee_by_role_container) {
-//   Display_Employee_by_role_container.addEventListener('click', (e) => {
-//     if (e.target.closest('.list-employee')) {
-//       console.log(e.target.closest('.list-employee'));
-//     }
-//   });
-// }
+  return dateObject.toISOString().slice(0, 10);
+}
