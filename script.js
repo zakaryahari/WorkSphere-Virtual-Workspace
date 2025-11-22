@@ -155,17 +155,35 @@ const add_employee_form = document.querySelector('#add_employee_form');
 
 function Valide_input_regex(inputElement, regex, span_id, msg_error) {
   let isvalid = true;
-  const employee_nom_msg_error = document.getElementById(span_id);
+  const div_msg_error = document.getElementById(span_id);
   if (regex.test(inputElement.value)) {
-    employee_nom_msg_error.textContent = '';
+    div_msg_error.textContent = '';
     isvalid = true;
   }
   if (!regex.test(inputElement.value) && inputElement.value !== '') {
-    employee_nom_msg_error.textContent = msg_error;
+    div_msg_error.textContent = msg_error;
     isvalid = false;
   }
   if (inputElement.value === '') {
-    employee_nom_msg_error.textContent = '';
+    div_msg_error.textContent = '';
+    isvalid = false;
+  }
+  return isvalid;
+}
+
+function Valide_experience_regex(inputElement, regex, span, msg_error) {
+  let isvalid = true;
+  // const employee_nom_msg_error = document.getElementById(span_id);
+  if (regex.test(inputElement.value)) {
+    span.textContent = '';
+    isvalid = true;
+  }
+  if (!regex.test(inputElement.value) && inputElement.value !== '') {
+    span.textContent = msg_error;
+    isvalid = false;
+  }
+  if (inputElement.value === '') {
+    span.textContent = '';
     isvalid = false;
   }
   return isvalid;
@@ -174,6 +192,8 @@ function Valide_input_regex(inputElement, regex, span_id, msg_error) {
 let nom_regex = /^[A-Za-z]+(?:[\sA-Za-z]){2,}$/;
 let email_regex = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/;
 let phone_regex = /^(?:\+212|0|6)+\d{8,9}$/;
+let company_regex = /^[A-Za-z\s]{2,}$/;
+let role_regex = /^[A-Za-z\s\/-]{2,}$/;
 
 const nom_msg_error = 'Please enter a valid name.';
 const email_msg_error = 'Please enter a valid Email.';
@@ -184,6 +204,14 @@ const nom_spanId = 'employee_nom_msg_error';
 const email_spanId = 'employee_email_msg_error';
 const phone_spanId = 'employee_tel_msg_error';
 const Role_spanId = 'employee_role_msg_error';
+
+//exp regex:
+
+const exp_company_msg_error = 'Please enter a valid company.';
+const exp_role_msg_error = 'Please enter a valid role.';
+
+// const exp_company_spanId = 'employee_nom_msg_error';
+// const exp_role_spanId = 'employee_email_msg_error';
 
 if (add_employee_form) {
   add_employee_form.addEventListener('input', (e) => {
@@ -265,21 +293,25 @@ function Add_employee_experience() {
                   <div class="grid col-span-2">
                     <button type="button" class="delete_exp_employee text-red-500 hover:text-red-700 font-bold text-xl leading-none p-1 text-end" id="${count_employee_experience}" data-target-id="${containerId}">&times;</button>
                   </div>
-                  <div class="col-span-1">
+                  <div class="employee_experience_inputs col-span-1">
                     <label class="block">Entreprise:</label>
                     <input type="text" class="exp_company_input form_input outline-none w-full" name="Exp_Entreprise[${count_employee_experience}]"/>
+                    <span class="span_error_msg text-red-900"></span>
                   </div>
-                  <div class="col-span-1">
+                  <div class="employee_experience_inputs col-span-1">
                     <label  class="block">Rôle:</label>
                     <input type="text" class="exp_role_input form_input outline-none w-full" name="Exp_Role[${count_employee_experience}]"/>
+                    <span id="exp_role_msg_error" class="text-red-900"></span>
                   </div>
-                  <div class="col-span-1">
+                  <div class="employee_experience_inputs col-span-1">
                     <label class="block">Date de début:</label>
                     <input type="date" class="exp_start_date_input form_input outline-none w-full" name="Exp_Start_date[${count_employee_experience}]"/>
+                    <span id="exp_datestart_msg_error" class="text-red-900"></span>
                   </div>
-                  <div class="col-span-1">
+                  <div class="employee_experience_inputs col-span-1">
                     <label class="block">Date fin:</label>
                     <input type="date" class="exp_end_date_input form_input outline-none w-full" name="Exp_End_date[${count_employee_experience}]" disabled/>
+                    <span id="exp_datend_msg_error" class="text-red-900"></span>
                   </div>
                 </div>
                 `;
@@ -310,8 +342,46 @@ if (experiences_container) {
     const element_val = e.target;
 
     if (element_val.classList.contains('exp_company_input')) {
+      const parent_exp_div = element_val.closest('.employee_experience_inputs');
+      const child_span = parent_exp_div.querySelector('span');
+      console.log(child_span);
+      Valide_experience_regex(element_val, company_regex, child_span, exp_company_msg_error);
+    }
+    if (element_val.classList.contains('exp_role_input')) {
+      const parent_exp_div = element_val.closest('.employee_experience_inputs');
+      const child_span = parent_exp_div.querySelector('span');
+      console.log(child_span);
+      Valide_experience_regex(element_val, role_regex, child_span, exp_role_msg_error);
     }
   });
+}
+
+function Add_new_employee_experience() {
+  let new_experience = [];
+
+  const companyInputs = document.querySelectorAll('.exp_company_input');
+  const roleInputs = document.querySelectorAll('.exp_role_input');
+  const startDateInputs = document.querySelectorAll('.exp_start_date_input');
+  const endDateInputs = document.querySelectorAll('.exp_end_date_input');
+
+  for (let i = 0; i < companyInputs.length; i++) {
+    // console.log(companyInputs[i].value.trim());
+    let company = companyInputs[i].value.trim();
+    let role = roleInputs[i].value.trim();
+
+    if (company || role) {
+      let tempexperience = {
+        id: `EXP0${i}`,
+        company: company,
+        role: role,
+        startdate: startDateInputs[i].value,
+        enddate: endDateInputs[i].value,
+      };
+      new_experience.push(tempexperience);
+    }
+  }
+
+  return new_experience;
 }
 
 function delete_employee_experience(ID) {
@@ -384,6 +454,8 @@ function Valide_input_submit() {
   // if (inner_exp_container) {
   //   Valide_experience();
   // }
+
+  Add_new_employee_experience();
 }
 
 function NextID() {
@@ -400,10 +472,10 @@ function Add_employee_data() {
   const employee_photo_input = document.getElementById('employee_photo_input').value;
   const employee_email_input = document.getElementById('employee_email_input').value;
   const employee_tel_input = document.getElementById('employee_tel_input').value;
-
+  const experience_data = Add_new_employee_experience();
   let Id_employee = NextID();
 
-  const employee_object = {id: Id_employee, nom: employee_nom_input, role: employee_role_input, email: employee_email_input, tel: employee_tel_input, photo: employee_photo_input, isactive: null, experiences: {}};
+  const employee_object = {id: Id_employee, nom: employee_nom_input, role: employee_role_input, email: employee_email_input, tel: employee_tel_input, photo: employee_photo_input, isactive: null, experiences: experience_data};
   list_employee.push(employee_object);
   console.log(list_employee[list_employee.length - 1]);
 }
@@ -601,6 +673,8 @@ function Display_Employee_cv(ID) {
   const Display_Employee_by_sidebar_container = document.querySelector('.Display_Employee_by_sidebar_container');
   list_employee.forEach((employee) => {
     if (employee.id == ID) {
+      let all_experineces;
+      employee.experiences.forEach((exp) => {});
       Display_Employee_by_sidebar_container.innerHTML = '';
       Display_Employee_by_sidebar_container.innerHTML += `          
           <div class="lg:col-span-2 justify-items-center pb-2">
