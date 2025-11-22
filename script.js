@@ -498,7 +498,7 @@ function Display_Employee_list_SideBar() {
             </div>
             <div class="content-center">
               <button class="bg-blue-500 hover:bg-blue-600 text-white text-base font-medium py-2 px-4 rounded-full shadow-md transition duration-200">
-                <span class="underline-offset-4 decoration-2">Éditer</span>
+                <span class="underline-offset-4 decoration-2">View Cv</span>
               </button>
             </div>
           </div>
