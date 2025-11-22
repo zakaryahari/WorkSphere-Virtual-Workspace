@@ -670,11 +670,33 @@ if (Display_Employee_list) {
 }
 
 function Display_Employee_cv(ID) {
+  let all_experineces = '';
   const Display_Employee_by_sidebar_container = document.querySelector('.Display_Employee_by_sidebar_container');
   list_employee.forEach((employee) => {
     if (employee.id == ID) {
-      let all_experineces;
-      employee.experiences.forEach((exp) => {});
+      if (employee.experiences.length === 0) {
+        all_experineces = `<div class="lg:col-span-2 pt-4 border-t border-gray-700">
+                                 <p class="text-gray-400 italic">Aucune expérience professionnelle enregistrée.</p>
+                             </div>`;
+      } else {
+        employee.experiences.forEach((exp) => {
+          all_experineces += `
+            <h3 class="text-xl font-bold text-white tracking-wider border-b border-gray-600 pb-2">Expériences Détaillées</h3>
+
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+              <h4 class="text-base font-extrabold text-white tracking-wider">Entreprise : <span class="text-blue-400">${exp.company}</span></h4>
+            </div>
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+              <h4 class="text-base font-extrabold text-white tracking-wider">Role : <span class="text-blue-400">${exp.role}</span></h4>
+            </div>
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+              <h4 class="text-base font-extrabold text-white tracking-wider">Debut : <span class="text-blue-400">${exp.startdate}</span></h4>
+            </div>
+            <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+              <h4 class="text-base font-extrabold text-white tracking-wider">Fin : <span class="text-blue-400">${exp.enddate}</span></h4>
+            </div>`;
+        });
+      }
       Display_Employee_by_sidebar_container.innerHTML = '';
       Display_Employee_by_sidebar_container.innerHTML += `          
           <div class="lg:col-span-2 justify-items-center pb-2">
@@ -691,6 +713,9 @@ function Display_Employee_cv(ID) {
           </div>
           <div class="lg:col-span-1 p-8 bg-gray-800 p-4 rounded-lg border border-gray-700">
             <h2 class="text-2xl font-extrabold text-white tracking-wider">Télephone : <span class="text-blue-400">${employee.tel}</span></h2>
+          </div>
+          <div class="lg:col-span-2 bg-gray-700 p-4 rounded-lg border border-gray-600 grid grid-cols-1 gap-4">
+          ${all_experineces}
           </div>`;
     }
   });
