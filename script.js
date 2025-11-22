@@ -103,14 +103,14 @@ const ZONE_RULES = [
   {
     id: 'zone-conference',
     name: 'Salle de Conférence',
-    nombre_max: 8,
+    nombre_max: 2,
     allowedRoles: ['Manager', 'Autre', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité', 'Nettoyage'],
     employeesId: [],
   },
   {
     id: 'zone-reception',
     name: 'Réception',
-    nombre_max: 7,
+    nombre_max: 2,
     allowedRoles: ['Réceptionniste', 'Manager', 'Nettoyage'],
     employeesId: [],
   },
@@ -722,27 +722,30 @@ function Display_Employee_cv(ID) {
 }
 
 function Add_employee_to_zone(ID, Zono_id) {
+  let size;
+  // ZONE_RULES.forEach((zone) => {});
   ZONE_RULES.forEach((zone) => {
     if (zone.id === Zono_id) {
-      zone.employeesId.push(ID);
-    }
-  });
-  list_employee.forEach((employee) => {
-    if (employee.id == ID) {
-      employee.isactive = true;
-      Display_Employee_list_SideBar();
-    }
-  });
+      size = zone.employeesId.length + 1;
+      if (zone.nombre_max >= size) {
+        zone.employeesId.push(ID);
 
-  const Zone_container = document.getElementById(Zono_id);
+        list_employee.forEach((employee) => {
+          if (employee.id == ID) {
+            employee.isactive = true;
+            Display_Employee_list_SideBar();
+          }
+        });
 
-  let child_zone = Zone_container.querySelector('.zone_employee_minilist_display');
+        const Zone_container = document.getElementById(Zono_id);
 
-  child_zone.innerHTML += '';
+        let child_zone = Zone_container.querySelector('.zone_employee_minilist_display');
 
-  list_employee.forEach((employee) => {
-    if (employee.id == ID) {
-      child_zone.innerHTML += `
+        child_zone.innerHTML += '';
+
+        list_employee.forEach((employee) => {
+          if (employee.id == ID) {
+            child_zone.innerHTML += `
                   <div class="employee_cercle grid lg:grid-rows-1">
                     <div class="flex items-center lg:row-span-1 p-1 bg-gray-700 rounded-lg gap-1">
                       <div class="w-12 h-12 flex-shrink-0 ">
@@ -751,10 +754,13 @@ function Add_employee_to_zone(ID, Zono_id) {
                       <button class="zone-remove-btn flex-shrink-0 text-red-400 hover:text-red-400 font-bold text-lg leading-none transition duration-150" data-employee-id="${employee.id}" data-zone-id="${Zono_id}" type="button">X</button>
                     </div>
                   </div>`;
+          }
+        });
+      } else {
+        alert("you can't add more pepole in this zone .");
+      }
     }
   });
-
-  console.log();
 }
 
 function Check_date(StartDate) {
