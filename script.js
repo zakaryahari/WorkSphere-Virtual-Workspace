@@ -66,7 +66,7 @@ let list_employee = [
   {
     id: 1005,
     nom: 'Khadim Omar',
-    role: 'Autre',
+    role: 'Technicien IT',
     email: 'omar.khadim@service.ma',
     tel: '0651627384',
     photo: 'https://randomuser.me/api/portraits/men/9.jpg',
@@ -103,28 +103,28 @@ const ZONE_RULES = [
   {
     id: 'zone-conference',
     name: 'Salle de Conférence',
-    nombre_max: 2,
-    allowedRoles: ['Manager', 'Autre', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité', 'Nettoyage'],
+    nombre_max: 5,
+    allowedRoles: ['Manager', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité', 'Nettoyage'],
     employeesId: [],
   },
   {
     id: 'zone-reception',
     name: 'Réception',
-    nombre_max: 2,
+    nombre_max: 5,
     allowedRoles: ['Réceptionniste', 'Manager', 'Nettoyage'],
     employeesId: [],
   },
   {
     id: 'zone-serveurs',
     name: 'Salle des Serveurs',
-    nombre_max: 3,
+    nombre_max: 2,
     allowedRoles: ['Technicien IT', 'Manager'],
     employeesId: [],
   },
   {
     id: 'zone-securite',
     name: 'Salle de Sécurité',
-    nombre_max: 3,
+    nombre_max: 2,
     allowedRoles: ['Agent de sécurité', 'Manager', 'Nettoyage'],
     employeesId: [],
   },
@@ -132,14 +132,14 @@ const ZONE_RULES = [
     id: 'zone-personnel',
     name: 'Salle du Personnel',
     nombre_max: 2,
-    allowedRoles: ['Manager', 'Autre', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité', 'Nettoyage'],
+    allowedRoles: ['Manager', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité', 'Nettoyage'],
     employeesId: [],
   },
   {
     id: 'zone-archives',
     name: "Salle d'Archives",
-    nombre_max: 4,
-    allowedRoles: ['Manager', 'Autre', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité'],
+    nombre_max: 2,
+    allowedRoles: ['Manager', 'Réceptionniste', 'Technicien IT', 'Agent de sécurité'],
     employeesId: [],
   },
 ];
@@ -289,8 +289,8 @@ function Add_employee_experience() {
   count_employee_experience += 1;
   const containerId = `exp_cont_${count_employee_experience}`;
   const element_child = `                
-                <div class="inner-exp-container col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 bg-gray-400/50 p-3 my-2 rounded-lg" id="${containerId}">
-                  <div class="grid col-span-2">
+                <div class="inner-exp-container col-span-1 lg:col-span-2 grid grid-cols-1 lg:col-span-2 gap-x-6 bg-gray-400/50 p-3 my-2 rounded-lg" id="${containerId}">
+                  <div class="grid col-span-1 lg:col-span-2">
                     <button type="button" class="delete_exp_employee text-red-500 hover:text-red-700 font-bold text-xl leading-none p-1 text-end" id="${count_employee_experience}" data-target-id="${containerId}">&times;</button>
                   </div>
                   <div class="employee_experience_inputs col-span-1">
@@ -748,7 +748,7 @@ function Add_employee_to_zone(ID, Zono_id) {
             child_zone.innerHTML += `
                   <div class="employee_cercle grid lg:grid-rows-1">
                     <div class="flex items-center lg:row-span-1 p-1 bg-gray-700 rounded-lg gap-1">
-                      <div class="w-12 h-12 flex-shrink-0 ">
+                      <div class="w-4 h-4 sm:w-8 sm:h-8 lg:w-12 lg:h-12 flex-shrink-0 ">
                         <img src=${employee.photo} alt="${employee.nom}" class="rounded-full object-cover w-full h-full ring-1 ring-blue-400/70 mr-2" />
                       </div>
                       <button class="zone-remove-btn flex-shrink-0 text-red-400 hover:text-red-400 font-bold text-lg leading-none transition duration-150" data-employee-id="${employee.id}" data-zone-id="${Zono_id}" type="button">X</button>

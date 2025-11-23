@@ -125,7 +125,7 @@ body {
 .Form-container,
 .Display_Employee_by_role_container {
   background-color: white;
-  width: 800px;
+  width: 60%;
   padding: 25px;
   border-radius: 4px;
   box-shadow: 5px 5px 15px 5px #ffffff4d;
@@ -189,6 +189,10 @@ body {
     max-width: 95%;
     margin: 0 auto;
     height: auto;
+  }
+  .Form-container,
+  .Display_Employee_by_role_container {
+    width: 90%;
   }
 
   .zone {
