@@ -1,64 +1,51 @@
-🏢 WorkSphere — Gestion Visuelle et Interactive du Personnel
+# 🏢 WorkSphere
+### Rapport de Finalisation du Projet Interactif
+**Projet Front-End Complet – WorkSphere Studio**
 
-WorkSphere est une application web innovante permettant de gérer, visualiser et organiser en temps réel l’affectation des employés sur un plan d’étage virtuel.
-Le système applique automatiquement des règles métier strictes afin de garantir que chaque employé est positionné dans une zone autorisée selon son rôle.
+---
 
-🔗 Déploiement en Ligne
+## 🎯 Résumé Exécutif
+Ce document atteste de la finalisation du projet **WorkSphere**, une application web innovante dédiée à la **gestion visuelle et interactive du personnel** sur un plan d'étage virtuel.
 
-GitHub Pages : https://zakaryahari.github.io/WorkSphere-Virtual-Workspace/
+L'objectif était de créer une **solution complète d'organisation spatiale** en temps réel, intégrant des **règles métier strictes** (rôles vs zones autorisées) et offrant une **expérience utilisateur (UX) fluide et entièrement responsive**. Le cœur du projet repose sur la **manipulation du DOM** et la **logique conditionnelle** d'affectation.
 
-Lien de l’Application : (identique au-dessus si c'est votre déploiement principal)
+---
 
-Trello : WorkSphere – Virtual Workspace (ajoute ici le lien exact vers ton board Trello)
+## 🛠️ Achèvements Techniques Clés (Logique et Interface)
 
-✨ Objectifs Principaux
+### 1. 👥 Gestion du Personnel et Opérations CRUD (Ajout/Édition)
+- **Liste Non-Assignée** : Affichage dynamique des employés non encore affectés dans une sidebar dédiée (`list_employee` où `isactive: null`).
+- **Modal d'Ajout/Édition** : Implémentation d'une fenêtre modale unique pour la saisie des données des employés.
+- **Expériences Dynamiques** : Gestion dynamique des sous-formulaires pour l'ajout et la suppression des blocs **Expériences Professionnelles** (via `Add_employee_experience()` et `delete_employee_experience()`).
+- **Prévisualisation Photo** : Affichage en temps réel de la photo de profil par URL d'entrée.
 
-Organisation Facile : Visualiser précisément l’emplacement de chaque employé.
+### 2. 🛡️ Validation et Règles de Saisie
+- **Validation Réactive** : Mise en œuvre des fonctions `Valide_input_regex` et `Valide_experience_regex` pour la validation des champs (`Nom`, `Email`, `Téléphone`, `Entreprise`, `Rôle`) en temps réel (`input event`).
+- **Règles Regex** : Utilisation d'expressions régulières pour garantir la conformité des formats de données critiques.
+- **Validation du Rôle** : Vérification de la sélection du rôle avant la soumission (`Valide_Radio_Option`).
 
-Respect des Règles Métier : Assignation stricte selon les rôles vs zones autorisées.
+### 3. 🗺️ Logique d'Affectation Spatiale (Règles Métier)
+- **Plan d'Étage Interactif** : Rendu des **6 zones** prédéfinies (ex: Réception, Salle des Serveurs) avec leurs règles associées (via l'objet `ZONE_RULES`).
+- **Logique d'Éligibilité** : Le bouton d'assignation ("+") filtre les employés disponibles en fonction de deux critères :
+    1.  **Rôle compatible** avec la zone (`allowedRoles`).
+    2.  **Capacité maximale** de la zone non atteinte (`nombre_max`).
+- **Désaffectation** : Fonctionnalité de retrait via un bouton "X" sur la carte de l'employé, renvoyant immédiatement l'employé dans la liste "Non-Assignés" et mettant à jour la zone (`map_content` event listener).
 
-Expérience Utilisateur Optimisée : Interface fluide, intuitive et entièrement responsive.
+---
 
-🚀 Fonctionnalités Implémentées
-I. Gestion du Personnel & Formulaires
+## 💻 Technologies Clés
 
-Liste des Employés Non-Assignés via une sidebar dédiée.
+| Catégorie | Technologie | Rôle dans le Projet |
+| :--- | :--- | :--- |
+| **Langage** | **JavaScript (ES6+)** | Logique métier complète, Manipulation du DOM, Gestion des événements, Validation. |
+| **Structure** | **HTML5** | Structure sémantique de l'application. |
+| **Design/CSS** | **Tailwind CSS** | Styling rapide, conception moderne et professionnelle, mise en page Flexbox/Grid. |
+| **Versioning** | **Git / GitHub** | Gestion du code source et déploiement. |
 
-Modale d’Ajout/Édition avec formulaire complet (Nom, Rôle, Email, Téléphone…).
+---
 
-Gestion Dynamique des Expériences Professionnelles (ajout/suppression de blocs).
-
-Prévisualisation en Temps Réel de la photo de profil via URL.
-
-Validation des Champs (Nom, Email, Téléphone, Rôle).
-
-II. Carte Interactive & Affectation (Core Logic)
-
-Plan d’Étage divisé en 6 zones (ex : Réception, Salle des Serveurs…).
-
-Règles Métier (FP-02) :
-
-Technicien IT → Salle des Serveurs uniquement
-
-Réceptionniste → Réception uniquement
-
-Manager → Accès illimité
-
-Assignation par Bouton “+” : n’affiche que les employés compatibles + zone non saturée.
-
-Affichage Dynamique des employés assignés dans chaque zone.
-
-Désaffectation via bouton “X” pour renvoyer l’employé dans la liste principale.
-
-III. Design & Expérience Utilisateur
-
-Responsive Design grâce à Flexbox et CSS Grid, optimisé Desktop → Mobile.
-
-Design Moderne basé sur Tailwind CSS pour un rendu sobre et professionnel.
-
-💻 Technologies Utilisées
-Catégorie	Technologie	Rôle dans le Projet
-Langage	JavaScript (ES6+)	Logique métier, CRUD, DOM, Event Delegation
-Structure	HTML5	Structure sémantique de l'application
-Design/CSS	Tailwind CSS	Styling rapide, responsive design
-Versioning	Git / GitHub	Gestion du code source, collaboration
+## 💡 Auteur du Projet
+👨‍💻 **Zakarya Hari**
+📧 [zakariahari42@gmail.com](mailto:zakariahari42@gmail.com)
+🌐 **GitHub Pages** – [Lien du projet](https://zakaryahari.github.io/WorkSphere-Virtual-Workspace/)
+📋 **Trello Board** – [WorkSphere – Virtual Workspace](#) *(Ajouter ici le lien exact vers votre board Trello)*
